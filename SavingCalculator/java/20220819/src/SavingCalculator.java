@@ -30,22 +30,30 @@ public class SavingCalculator {
         System.out.println("연이자율을 입력해 주세요. (단위:%) : ");
         double savingsRate = scanner.nextDouble();
 
-        int totalMonthlyDeposit = monthlyDeposit * (savingsPeriod * 12);    //원금 합계
-        double calcSavingRate = savingsRate / 100 / 12;              //연 이자율
+        //연 이자율
+        double calcSavingRate = savingsRate * 0.01 / 12;
 
+        //세전 총 수령액
         int beforeTax = (int) (monthlyDeposit * (1 + calcSavingRate)
-                            * ((Math.pow(1 + calcSavingRate, (savingsPeriod * 12))) - 1) / calcSavingRate);
+                * ((Math.pow(1 + calcSavingRate, (savingsPeriod * 12))) - 1) / calcSavingRate);
 
-        int tax = beforeTax - totalMonthlyDeposit;      //이자 수익
-        double afterTax = tax - (tax * 0.154);     //세후 이자
+        //원금 합계
+        int totalMonthlyDeposit = monthlyDeposit * (savingsPeriod * 12);
+        String decimalTotalMonthlyDeposit = decimalFormat.format(totalMonthlyDeposit);
 
-        double totalAmount = totalMonthlyDeposit + afterTax;  //세후 총 수령액
+        //이자 수익
+        int tax = beforeTax - totalMonthlyDeposit;
 
-        System.out.println("tax - " + tax);
-        System.out.println("calcSavingRate - " + calcSavingRate);
+        //세후 이자
+        double afterTax = tax - (tax * 0.154);
+        String decimalAfterTax = decimalFormat.format(Math.ceil(afterTax));
 
-        System.out.println("원금합계: " + decimalFormat.format(totalMonthlyDeposit) + "원");
-        System.out.println("세후이자: " + decimalFormat.format(Math.ceil(afterTax)) + "원");
-        System.out.println("세후 총 수령액: " + decimalFormat.format((int)(Math.ceil(totalAmount))) + "");
+        //세후 총 수령액
+        double totalAmount = totalMonthlyDeposit + afterTax;
+        String decimalTotalAmount = decimalFormat.format(Math.ceil(totalAmount));
+
+        System.out.println("원금합계: " + decimalTotalMonthlyDeposit + "원");
+        System.out.println("세후이자: " + decimalAfterTax + "원");
+        System.out.println("세후 총 수령액: " + decimalTotalAmount + "원");
     }
 }
