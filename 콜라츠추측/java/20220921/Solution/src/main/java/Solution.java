@@ -1,12 +1,14 @@
 class Solution {
-    public int solution(long num) {
+    public int solution(int num) {
+        long n = num;
+
         int answer = 0;
 
-        if (num == 1) {
+        if (n == 1) {
             return answer = 0;
         }
 
-        answer = calculate(num);
+        answer = calculate(n);
 
         return answer;
     }
@@ -37,7 +39,7 @@ class Solution {
         return count;
     }
 
-    public Boolean isEven(long x) {
-        return x % 2 == 0;
+    public Boolean isEven(long num) {
+        return num % 2 == 0;
     }
 }
