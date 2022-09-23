@@ -2,12 +2,12 @@ public class SpiralMatrix {
     public static void main(String[] args) {
         SpiralMatrix application = new SpiralMatrix();
 
-        int length = 5;
+        int count = 5;
 
-        int[][] spiralMatrix = application.spiralMatrix(length);
+        int[][] spiralMatrix = application.spiralMatrix(count);
 
-        for (int i = 0; i < length; i += 1) {
-            for (int j = 0; j < length; j += 1) {
+        for (int i = 0; i < count; i += 1) {
+            for (int j = 0; j < count; j += 1) {
                 System.out.print(spiralMatrix[i][j]);
                 System.out.print("\t");
             }
@@ -15,10 +15,10 @@ public class SpiralMatrix {
         }
     }
 
-    private int[][] spiralMatrix(int length) {
-        int[][] spiralMatrix = new int[length][length];
+    private int[][] spiralMatrix(int count) {
+        int[][] spiralMatrix = new int[count][count];
 
-        int arrayLength = length;
+        int arrayLength = count;
 
         int i = -1;
         int j = 0;
