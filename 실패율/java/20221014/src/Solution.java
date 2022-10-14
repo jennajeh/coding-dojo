@@ -7,7 +7,7 @@ import java.util.Map;
 
 class Solution {
     public int[] solution(int N, int[] stages) {
-        Map<Integer, Double> map = new HashMap<>();
+        HashMap<Integer, Double> map = new HashMap<>();
 
         //각 스테이지에 머물러 있는 플레이어 수
         //스테이지 번호가 1~N까지이므로 0 인덱스는 버리기 위해 N+2
@@ -17,7 +17,13 @@ class Solution {
 
         //스테이지별 머물러 있는 플레이어 수 카운트
         for (int stage : stages) {
-            userFailCounts[stage] += 1;
+            userFailCounts[stage] ++;
+        }
+
+        //스테이지 별 도달한 플레이어 수 카운트
+        userTotalCounts[N] = userFailCounts[N] + userFailCounts[N+1];
+        for (int i = N-1; i >= 1; i--) {
+            userTotalCounts[i] = userFailCounts[i] + userTotalCounts[i+1];
         }
 
         //스테이지 별 실패율 계산
@@ -27,12 +33,12 @@ class Solution {
                 continue;
             }
 
-            map.put(i, (double) (userFailCounts[i] / userTotalCounts[i]));
+            map.put(i, (double) userFailCounts[i] / userTotalCounts[i]);
         }
 
         //실패율(value) 값으로 스테이지 번호(key)를 내림차순으로 정렬
         List<Integer> list = new ArrayList<>(map.keySet());
-        Collections.sort(list, ((o1, o2) -> Double.compare(map.get(o2), map.get(01))));
+        Collections.sort(list, (o1, o2) -> Double.compare(map.get(o2), map.get(o1)));
 
         return list.stream()
                 //Integer 에서 int 로 변환
