@@ -7,6 +7,9 @@ assignees: ''
 
 ---
 
+# 💡 How to solve it?
+> 문제를 풀기 전에 어떻게 풀 것인지 먼저 생각을 정리하고, 다 풀고 나서 회고한다.
+
 <details>
 <summary>📝 작성 가이드</summary>
 <div markdown="1">
