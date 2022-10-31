@@ -2,17 +2,34 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        Arrays.sort(participant);
-        Arrays.sort(completion);
+        String answer = unfinishedRunner(addPlayer(participant, completion));
+        return answer;
+    }
 
-        int i = 0;
+    public String unfinishedRunner(HashMap<String, Integer> runner) {
+        String answer = "";
 
-        for(i = 0 ; i < completion.length; i += 1) {
-            if (!participant[i].equals(completion[i])) {
+        for (String key : runner.keySet()) {
+            if (runner.get(key) != 0) {
+                answer = key;
                 break;
             }
         }
 
-        return participant[i];
+        return answer;
+    }
+
+    public HashMap<String, Integer> addPlayer(String[] participant, String[] completion) {
+        HashMap<String, Integer> runner = new HashMap<>();
+
+        for (String player : participant) {
+            runner.put(player, runner.getOrDefault(player, 0) + 1);
+        }
+
+        for (String player : completion) {
+            runner.put(player, runner.get(player) - 1);
+        }
+
+        return runner;
     }
 }
