@@ -24,13 +24,16 @@ class SolutionTest {
     }
 
     @Test
-    void solution() {
+    void getRanking() {
         Solution solution = new Solution();
 
         int[] lottos = {44, 1, 0, 0, 31, 25};
         int[] win_nums = {31, 10, 45, 1, 6, 19};
 
-        assertEquals(3, solution.solution(lottos, win_nums)[0]);
-        assertEquals(5, solution.solution(lottos, win_nums)[1]);
+        int win = solution.countWin(lottos, win_nums);
+        int zero = solution.countZero(lottos);
+
+        assertEquals(3, solution.getRanking(win, zero)[0]);
+        assertEquals(5, solution.getRanking(win, zero)[1]);
     }
 }
